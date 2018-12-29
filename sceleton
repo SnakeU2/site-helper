@@ -1,0 +1,32 @@
+# Virtual Host configuration for example.com
+#
+# You can move that to a different file under sites-available/ and symlink that
+# to sites-enabled/ to enable it.
+#
+
+server {
+	listen 80;
+	listen [::]:80;
+#
+	server_name __localDomain__ __remoteDomain__;
+#
+	root /var/www/__localDomain__/docs;
+	access_log /var/www/__localDomain__/logs/access.log;
+    	error_log  /var/www/__localDomain__/logs/error.log;
+
+	index index.php;
+
+
+	set $phpini "
+        error_log=/var/www/__localDomain__/logs/php-errors.log
+	";
+#
+#
+	location ~ ^(.*\.php)$ {
+		include fastcgi_params;
+                fastcgi_pass unix:/run/php/__phpVersion__;
+                fastcgi_param PHP_VALUE "$phpini";
+	        fastcgi_param SCRIPT_FILENAME $document_root$1;
+	}
+
+}
