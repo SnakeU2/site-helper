@@ -15,6 +15,7 @@ Usage: site-helper OPTION
     -d Disable site
     -a Enable site
     -r Remove site
+    -m Manage site (open site config in Nano editor)
     -b Create MySQL database
     -w Install last WordPress to site. Create new one if site name is empty or not in available 
 "
@@ -43,7 +44,8 @@ Enabled sites :
 -d) ./manage.sh -d;;
 -a) ./manage.sh -a;;
 -r) ./manage.sh -r;;
--b) ./manage.sh -b;;
+-m) ./manage.sh -m;;
+-b) ./db.sh;;
 -w) ./wp.sh;;
 *)  echo "$helpMessage";;
 esac

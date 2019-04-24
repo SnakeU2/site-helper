@@ -3,7 +3,7 @@
 list_out()
 {
     
-    if [[ ! $1 =~ -([dar]{1})$ ]] 
+    if [[ ! $1 =~ -([darm]{1})$ ]] 
     then 
         return 1
     fi
@@ -12,6 +12,10 @@ list_out()
     then
         local typeD="enabled"
         local operationNeed="disable"
+    elif [[ $1 == "-m" ]]
+    then
+        local typeD="enabled"
+        local operationNeed="manage"
     elif [[ $1 == "-a" ]] 
     then
         local typeD="available"
@@ -124,17 +128,28 @@ s_remove()
                 if [ $lnkTo == $siteFile ] 
                 then 
                     printf "\n%s\n" "Found link to ${listArr[$siteNum]} ${lnkTo}"
-                    #sudo rm ${lnkTo}
+                    sudo rm "/etc/nginx/sites-enabled/$lnk"
                 fi
             fi
         done
     fi
 
-    #sudo rm ${siteFile}
-    #sudo service nginx restart
-    #printf "\n%s\n" "Site "
+    sudo rm ${siteFile}
+    sudo service nginx restart
+    printf "\n%s\n" "Site "
     
 }
+
+s_manage ()
+{
+
+    nl=$(echo $'\n.')
+    nl=${nl%.}
+    sudo nano "/etc/nginx/sites-enabled/${listArr[$siteNum]}"
+ 
+}
+
+
 
 
 list_out $1
@@ -143,6 +158,6 @@ case $1 in
 -d) s_disable;; 
 -a) s_enable;;
 -r) s_remove;;
--b) s_db;;
+-m) s_manage;;
 *) echo "$1 is not a correct option";;
 esac
