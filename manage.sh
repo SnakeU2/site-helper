@@ -136,7 +136,7 @@ s_remove()
 
     sudo rm ${siteFile}
     sudo service nginx restart
-    printf "\n%s\n" "Site "
+    printf "\n%s\n%s\n\n" "Success!" "Site ${listArr[$siteNum]} removed."
     
 }
 
