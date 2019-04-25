@@ -16,7 +16,7 @@ if [ -f /root/.my.cnf ]; then
 	echo "Please enter the NAME of the new MySQL database user! (example: user1)"
 	read username
 	echo "Please enter the PASSWORD for the new MySQL database user!"
-	read userpass
+	read -s userpass
 	echo "Creating new user..."
 	mysql -e "CREATE USER ${username}@localhost IDENTIFIED BY '${userpass}';"
 	echo "User successfully created!"
@@ -44,7 +44,7 @@ else
 	echo "Please enter the NAME of the new MySQL database user! (example: user1)"
 	read username
 	echo "Please enter the PASSWORD for the new MySQL database user!"
-	read userpass
+	read -s userpass
 	echo "Creating new user..."
 	mysql -uroot -p${rootpasswd} -e "CREATE USER ${username}@localhost IDENTIFIED BY '${userpass}';"
 	echo "User successfully created!"
