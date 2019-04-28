@@ -134,6 +134,15 @@ s_remove()
         done
     fi
 
+    if [ -d "/var/www/${listArr[$siteNum]}" ]
+    then
+        read -n 1 -s -r -p "Remove data in /var/www/${listArr[$siteNum]} ? [y/*]" RDATA
+        if [[ $RDATA == [yY] ]]
+        then 
+            sudo rm -rf /var/www/${listArr[$siteNum]}
+        fi
+    fi 
+
     sudo rm ${siteFile}
     sudo service nginx restart
     printf "\n%s\n%s\n\n" "Success!" "Site ${listArr[$siteNum]} removed."

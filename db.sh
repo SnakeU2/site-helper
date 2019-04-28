@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Bash script written by Saad Ismail - me@saadismail.net
 
 # If /root/.my.cnf exists then it won't ask for root password

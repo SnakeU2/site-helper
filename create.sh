@@ -43,10 +43,15 @@ sudo mkdir /var/www/${localDomain}
 sudo mkdir /var/www/${localDomain}/docs
 sudo mkdir /var/www/${localDomain}/logs
 
-sudo chown -R snake:www-data /var/www/${localDomain}
+sudo chown -R ${USER}:www-data /var/www/${localDomain}
 sudo chmod -R 775 /var/www/${localDomain}
 
-echo "<?php ${nl} phpinfo();" > /var/www/${localDomain}/docs/index.php
+read -sr -n 1 -p "Create test index.php? [y/*]" testIndex 
+
+if [[ $testIndex == [yY] ]]
+then
+    echo "<?php ${nl} phpinfo();" > /var/www/${localDomain}/docs/index.php
+fi
 
 
 # 5. Restart nginx
