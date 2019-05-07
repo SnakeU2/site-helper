@@ -14,7 +14,7 @@ list_out()
         local operationNeed="disable"
     elif [[ $1 == "-m" ]]
     then
-        local typeD="enabled"
+        local typeD="available"
         local operationNeed="manage"
     elif [[ $1 == "-a" ]] 
     then
@@ -154,7 +154,7 @@ s_manage ()
 
     nl=$(echo $'\n.')
     nl=${nl%.}
-    sudo nano "/etc/nginx/sites-enabled/${listArr[$siteNum]}"
+    sudo nano "/etc/nginx/sites-available/${listArr[$siteNum]}"
  
 }
 
